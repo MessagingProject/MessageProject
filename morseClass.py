@@ -1,11 +1,8 @@
 import sys
 import string
 
-
 class Morse:
-	def __init__ (self, message):
-		self.message = message.lower()
-
+	def __init__ (self):
 		self.morse = [".-","-...","-.-.","-..",".","..-.",
 				"--.","....","..",".---","-.-",".-..","--",
 				"-.","---",".--.","--.-",".-.","...","-","..-",
@@ -13,9 +10,11 @@ class Morse:
 		
 		self.alph = string.ascii_lowercase
 
-	def To_Morse(self):
+	def To_Morse(self, message):
 		space = ' '
 
+		message = message.lower()
+		
 		translated_message = []
 
 		for i in range(0, len(self.message)):
@@ -29,22 +28,41 @@ class Morse:
 
 			translated_message.append(new_character)
 
-		self.message = space.join(translated_message)
+		message = space.join(translated_message)
+		
+		return message
 
-	def To_English(self):
-		space = ' '
+	def To_English(self, message):
+		no_space = ''
 
+		message = message.split(' ')
+		
 		translated_message = []
 
 		for i in range(0, len(self.message)):
 			character = message[i]
 
 			if character != '/':
-				index = self.morse.find(character)
-					new_character = self.alph[index]
+				index = self.morse.index(character)
+				new_character = self.alph[index]
 			else:
 				new_character = ' '
 
 			translated_message.append(new_character)
 
-		self.message = space.join(translated_message)
+		self.message = no_space.join(translated_message)
+		
+		return message
+	
+
+Morse = Morse()
+
+morse_message = Morse.To_Morse(message)
+real_message = Morse.To_English(morse_message)
+
+
+# TEST
+print(morse_message)
+print(real_message)
+		
+		
