@@ -1,6 +1,7 @@
 import sys
 import string
 
+
 class Morse:
 	def __init__ (self, message):
 		self.message = message.lower()
