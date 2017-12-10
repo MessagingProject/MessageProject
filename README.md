@@ -3,6 +3,7 @@
 ## Morse Code: **Annabelle**
    * Translate to Morse
    * Translate to English
+   * Overall code structure
 
 ## Cipher: **Brian**
 
