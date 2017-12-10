@@ -94,5 +94,5 @@ while mypigeon.hunger < 75 and mypigeon.energy < 75:
 
 		
 mypigeon.newMessage()
-writetofile(mypigeon.pigeonmessage)
+return mypigeon.pigeonmessage
 
