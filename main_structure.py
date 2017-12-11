@@ -1,5 +1,30 @@
 import time
 import random
+import sys
+import string
+
+pigeonart = """ #ascii art
+                                                 ,::::.._
+                                               ,':::::::::.
+                                           _,-'`:::,::(o)::`-,.._
+                                        _.', ', `:::::::::;'-..__`.
+                                   _.-'' ' ,' ,' ,\:::,'::-`'''
+                               _.-'' , ' , ,'  ' ,' `:::/
+                         _..-'' , ' , ' ,' , ,' ',' '/::
+                 _...:::'`-..'_, ' , ,'  , ' ,'' , ,'::|
+              _`.:::::,':::::,'::`-:..'_',_'_,'..-'::,'|
+      _..-:::'::,':::::::,':::,':,'::,':::,'::::::,':::;
+        `':,'::::::,:,':::::::::::::::::':::,'::_:::,'/
+        __..:'::,':::::::--''' `-:,':,':::'::-' ,':::/
+   _.::::::,:::.-''-`-`..'_,'. ,',  , ' , ,'  ', `','
+ ,;;;;:''''`                 \:. . ,' '  ,',' '_,'
+                               ``::._,'_'_,',.-'
+                                   \\\\ \\\\
+                                    \\\\_\\\\
+                                     \\\\`-`.-'_
+                                  .`-.\\\\__`. ``
+                                     ``-.-._
+                                         ` """
 
 class pigeon: #pigeon class
 	global message
@@ -53,7 +78,7 @@ class pigeon: #pigeon class
 				elif action in ('n'):
 					print("Ok, but your pigeon can't fly until you feed him.")
 
-			elif mypigeon.energy < 75: just tired
+			elif mypigeon.energy < 75: #just tired
 				print("Your Pigeon is too tired to deliver your message right now.")
 				action = input('Would you like to rest your pigeon? y/n: ')
 				while action not in ('y', 'n'):
@@ -68,38 +93,64 @@ class pigeon: #pigeon class
 		return mypigeon.new_message # returns the new pigeon message
 
 
+class Morse:
+	def __init__ (self):
+		self.morse = [".-","-...","-.-.","-..",".","..-.",
+				"--.","....","..",".---","-.-",".-..","--",
+				"-.","---",".--.","--.-",".-.","...","-","..-",
+				"...-",".--","-..-","-.--","--.."]
+		
+		self.alph = string.ascii_lowercase
 
-#Morse = Morse()
-#Cipher = Cipher()
+	def To_Morse(self, message):
+		space = ' '
+
+		message = message.lower()
+		
+		translated_message = []
+
+		for i in range(0, len(message)):
+			character = message[i]
+
+			if character != ' ':
+				index = self.alph.find(character)
+				new_character = self.morse[index]
+			else:
+				new_character = '/'
+
+			translated_message.append(new_character)
+
+		message = space.join(translated_message)
+		
+		return message
+
+	def To_English(self, message):
+		no_space = ''
+
+		message = message.split(' ')
+		
+		translated_message = []
+
+		for i in range(0, len(message)):
+			character = message[i]
+
+			if character != '/':
+				index = self.morse.index(character)
+				new_character = self.alph[index]
+			else:
+				new_character = ' '
+
+			translated_message.append(new_character)
+
+		self.message = no_space.join(translated_message)
+		
+		return message
 
 ###############################
 
 print('Welcome to Messenger!')
 
 time.sleep(1)
-
-pigeonart = """ #ascii art
-                                                 ,::::.._
-                                               ,':::::::::.
-                                           _,-'`:::,::(o)::`-,.._
-                                        _.', ', `:::::::::;'-..__`.
-                                   _.-'' ' ,' ,' ,\:::,'::-`'''
-                               _.-'' , ' , ,'  ' ,' `:::/
-                         _..-'' , ' , ' ,' , ,' ',' '/::
-                 _...:::'`-..'_, ' , ,'  , ' ,'' , ,'::|
-              _`.:::::,':::::,'::`-:..'_',_'_,'..-'::,'|
-      _..-:::'::,':::::::,':::,':,'::,':::,'::::::,':::;
-        `':,'::::::,:,':::::::::::::::::':::,'::_:::,'/
-        __..:'::,':::::::--''' `-:,':,':::'::-' ,':::/
-   _.::::::,:::.-''-`-`..'_,'. ,',  , ' , ,'  ', `','
- ,;;;;:''''`                 \:. . ,' '  ,',' '_,'
-                               ``::._,'_'_,',.-'
-                                   \\\\ \\\\
-                                    \\\\_\\\\
-                                     \\\\`-`.-'_
-                                  .`-.\\\\__`. ``
-                                     ``-.-._
-                                         ` """
 
 print('	')
 message = input('What message do you want to send today? ')
@@ -131,6 +182,7 @@ if method == 1:
 	new_message = mypigeon.carry()
 
 if method == 2:
+	Morse = Morse()
 	new_message = Morse.To_Morse(message)
 
 if method == 3:
