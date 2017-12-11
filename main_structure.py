@@ -26,6 +26,25 @@ pigeonart = """ #ascii art
                                      ``-.-._
                                          ` """
 
+
+def sendToFile(string):
+	file = open("Output.txt","w")
+	file.write(string + ' - written to file')
+
+	for x in range(12):
+		sys.stdout.write("\033[K")
+	for x in range(5):
+		y = 0
+		for y in range (0,6):
+			if y == 0:
+				b = ''
+			else:
+				b = '*' * (y-1)
+			print(b, end="\r")
+			time.sleep(.2)
+		sys.stdout.write("\033[K")
+	print('Message Sent!')
+
 class pigeon: #pigeon class
 	global message
 	global pigeonart
@@ -104,7 +123,7 @@ class Morse:
 
 	def To_Morse(self, message):
 		space = ' '
-
+		
 		message = message.lower()
 		
 		translated_message = []
@@ -188,5 +207,8 @@ if method == 2:
 if method == 3:
 	new_message = Cipher.Encrypt(message)
 
-#sendToFile(new_message)
-print(new_message)
+sendToFile(new_message)
+#print(new_message)
+
+
+
