@@ -1,25 +1,25 @@
 import time
 import random
 
-class pigeon:
+class pigeon: #pigeon class
 	global message
 	global pigeonart
-	def __init__(self,pigeonart,message):
-		self.hunger = random.randrange(20,80)
-		self.energy = random.randrange(20,80)
+	def __init__(self,pigeonart,message): #init variables for later
+		self.hunger = random.randrange(20,80) #generates a random value between 20 and 80
+		self.energy = random.randrange(20,80) #anything above 75 means the pigeon is full/rested enough to fly
 		self.message = message
-		self.pigeonart = pigeonart
+		self.pigeonart = pigeonart #this and above needed to create the new message 
 
-	def eat(self):
+	def eat(self): #feeding the pigeon enough so he can fly
 		print('Yummy!')
-		self.hunger += 30
-		if self.hunger > 75:
+		self.hunger += 30 #add 30 to hunger
+		if self.hunger > 75: #if greater than 75, pigeon is full
 			print('Your pigeon is full and ready to fly!')
 			print(end='')
-		else:
+		else: #else nothing, have a pigeon still hungry prompt below
 			print(end='')
 
-	def rest(self):
+	def rest(self): #same as above but with rest/sleep instead of flight
 		print('Pleased chirp')
 		self.energy += 30
 		if self.energy > 75:
@@ -28,22 +28,22 @@ class pigeon:
 		else:
 			print(end='')
 
-	def newMessage(self):
+	def newMessage(self): #combines the old message with the pigeon ascii art
 		self.new_message = self.pigeonart + '\n' + self.message
 
-	def carry(message):
-		while mypigeon.hunger < 75 and mypigeon.energy < 75:
-			if mypigeon.hunger < 75 and mypigeon.energy < 75:
+	def carry(message): #start of pigeon loop
+		while mypigeon.hunger < 75 and mypigeon.energy < 75: #while pigeon is not rested and fed
+			if mypigeon.hunger < 75 and mypigeon.energy < 75: #both 
 				print("Your Pigeon is too tired and hungry to deliver your message right now.")
-				action = input('Would you like to feed or rest your pigeon? ')
+				action = input('Would you like to feed or rest your pigeon? ') 
 				while action not in ('rest', 'feed'):
-					action = input('Please enter rest or feed: ')
+					action = input('Please enter rest or feed: ') 
 				if action in ('feed'):
 					mypigeon.eat()
 				elif action in ('rest'):
 					mypigeon.rest()
 
-			elif mypigeon.hunger < 75:
+			elif mypigeon.hunger < 75: #just hungry
 				print("Your Pigeon is too hungry to deliver your message right now.")
 				action = input('Would you like to feed your pigeon? y/n: ')
 				while action not in ('y', 'n'):
@@ -53,7 +53,7 @@ class pigeon:
 				elif action in ('n'):
 					print("Ok, but your pigeon can't fly until you feed him.")
 
-			elif mypigeon.energy < 75:
+			elif mypigeon.energy < 75: just tired
 				print("Your Pigeon is too tired to deliver your message right now.")
 				action = input('Would you like to rest your pigeon? y/n: ')
 				while action not in ('y', 'n'):
@@ -64,8 +64,8 @@ class pigeon:
 					print("Ok, but your pigeon can't fly until you rest him.")
 
 		
-		mypigeon.newMessage()
-		return mypigeon.new_message
+		mypigeon.newMessage() #initilaizes the pigeon class
+		return mypigeon.new_message # returns the new pigeon message
 
 
 
@@ -78,7 +78,7 @@ print('Welcome to Messenger!')
 
 time.sleep(1)
 
-pigeonart = """
+pigeonart = """ #ascii art
                                                  ,::::.._
                                                ,':::::::::.
                                            _,-'`:::,::(o)::`-,.._
