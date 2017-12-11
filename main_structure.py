@@ -64,7 +64,7 @@ class pigeon: #pigeon class
 					print("Ok, but your pigeon can't fly until you rest him.")
 
 		
-		mypigeon.newMessage() #initilaizes the pigeon class
+		mypigeon.newMessage() #after the carry function is done, combine the old message with pigeon ascii art
 		return mypigeon.new_message # returns the new pigeon message
 
 
