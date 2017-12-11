@@ -3,7 +3,7 @@ import random
 import sys
 import string
 
-pigeonart = """ #ascii art
+pigeonart = """ 
                                                  ,::::.._
                                                ,':::::::::.
                                            _,-'`:::,::(o)::`-,.._
@@ -112,7 +112,7 @@ class pigeon: #pigeon class
 		return mypigeon.new_message # returns the new pigeon message
 
 
-class Morse:
+class Morse: # Contains two functions that each take in a message and output its coded or decoded equivalent
 	def __init__ (self):
 		self.morse = [".-","-...","-.-.","-..",".","..-.",
 				"--.","....","..",".---","-.-",".-..","--",
@@ -122,47 +122,39 @@ class Morse:
 		self.alph = string.ascii_lowercase
 
 	def To_Morse(self, message):
-		space = ' '
-		
+		space = ' '	
 		message = message.lower()
-		
 		translated_message = []
 
-		for i in range(0, len(message)):
+		for i in range(0, len(message)): # Finds corresponding Morse code equivalent of given letter in message
 			character = message[i]
-
 			if character != ' ':
 				index = self.alph.find(character)
 				new_character = self.morse[index]
 			else:
 				new_character = '/'
 
-			translated_message.append(new_character)
+			translated_message.append(new_character) # New characters are all added to list to be combined into new message string
 
 		message = space.join(translated_message)
-		
 		return message
 
 	def To_English(self, message):
 		no_space = ''
-
 		message = message.split(' ')
-		
 		translated_message = []
 
-		for i in range(0, len(message)):
+		for i in range(0, len(message)): # Finds corresponding Morse code equivalent of given letter in message
 			character = message[i]
-
 			if character != '/':
 				index = self.morse.index(character)
 				new_character = self.alph[index]
 			else:
 				new_character = ' '
 
-			translated_message.append(new_character)
+			translated_message.append(new_character)# New characters are all added to list to be combined into new message string
 
 		self.message = no_space.join(translated_message)
-		
 		return message
 
 class cipher: #cipher class

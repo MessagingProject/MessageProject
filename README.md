@@ -1,5 +1,7 @@
 # MessageProject
 
+This program takes a message input from a user, allows them to choose a communication method, and either prints a coded version of their message to a file (for Morse and Cipher options) or requires them to take care of a carrier pigeon before 'sending' their message.
+
 ## Morse Code: **Annabelle**
    * Translate to Morse
    * Translate to English
