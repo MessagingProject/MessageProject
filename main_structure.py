@@ -30,7 +30,7 @@ pigeonart = """ #ascii art
 def sendToFile(string):
 	file = open("Output.txt","w")
 	file.write(string + ' - written to file')
-
+	'''
 	for x in range(12):
 		sys.stdout.write("\033[K")
 	for x in range(5):
@@ -42,7 +42,7 @@ def sendToFile(string):
 				b = '*' * (y-1)
 			print(b, end="\r")
 			time.sleep(.2)
-		sys.stdout.write("\033[K")
+		sys.stdout.write("\033[K")'''
 	print('Message Sent!')
 
 class pigeon: #pigeon class
@@ -165,6 +165,87 @@ class Morse:
 		
 		return message
 
+class cipher: #cipher class
+	def __init__(self, type, message):
+		self.message = message.lower()
+		self.type = "cesear"
+		self.scrambled = False
+		self.alphabet = string.ascii_lowercase
+		self.shift = []
+
+	def scramble(self, type):
+		space = " "
+		finalMessage = []
+		if type == "cesear":
+			for j in range(0, len(self.message)):
+				character = message[j]
+				if character != space:
+					finder = self.alphabet.find(character)
+					newCharacter = (finder+3)
+				else:
+					newCharacter = space
+				finalMessage.append(newCharacter)
+				self.message = finalMessage
+				'''this is a classic cesear cipher
+				takes the message and shifts each character by three letters to the right
+				'''
+		if type == "alpharando":
+			for j in range(0, len(self.message)):
+				character = message[j]
+				if character != space:
+					finder = self.alphabet.find(character)
+					shift.append(random.randint(0,25))
+					newIndex = finder + shift[j]
+					if newIndex > 25:
+						newIndex = newIndex - 26
+					newCharacter = self.alphabet.find(newIndex)
+
+					'''first letter of message, find in alphabet
+					generate random number, save it to shift
+					wrapping: if index + shift is greater than 26, subtract 26
+					find character at index (index of original letter plus shift)
+					put character  in message
+
+					determine index of character in messsage
+					find number at that index in shift list
+					find index of character in alphabet
+					find character in alphabet at index (index of character minus shift)
+					put character in message
+					'''
+				else:
+					newCharacter = space
+				finalMessage.append(newCharacter)
+
+				nospace = ""
+				self.message = nospace.join(finalMessage)
+	def unscramble(self, type):
+		space = " "
+		finalMessage = []
+		if type == "cesear":
+			for j in range(0, len(self.message)):
+				character = message[j]
+				if character != space:
+					finder = self.alphabet.find(character)
+					newCharacter = (finder-3)
+				else:
+					newCharacter = space
+				finalMessage.append(newCharacter)
+				self.message = finalMessage
+
+		if type == "alpharando":
+			for j in range(0, len(self.message)):
+				character = message[j]
+				if character != space:
+					finder = self.alphabet.find(character)
+					newCharacter = alphabet[finder-shift[j]]
+
+				else:
+					newCharacter = space
+				finalMessage.append(newCharacter)
+
+				nospace = ""
+				self.message = nospace.join(finalMessage)
+
 ###############################
 
 print('Welcome to Messenger!')
@@ -205,7 +286,11 @@ if method == 2:
 	new_message = Morse.To_Morse(message)
 
 if method == 3:
-	new_message = Cipher.Encrypt(message)
+	typ = input("What type of encryption do you want(cesear or alpharando)?")
+	if typ != "cesear" or "alpharando":
+		typ = "cesear"
+	cipeher = cipher(typ, message)
+	new_message = Cipher.scramble(typ)
 
 sendToFile(new_message)
 #print(new_message)

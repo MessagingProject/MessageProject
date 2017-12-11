@@ -1,7 +1,16 @@
-import toFile
+
 import random
+import string
+#toFile
+def sendToFile(string):
+	file = open("Output.txt","w")
+	file.write(string + ' - written to file')
+def readFile(lineNumber):
+	file = open("Output.txt","r")
+	return file.read(lineNumber)
+
 class cipher:
-	def __inint__(self, type, message):
+	def __init__(self, type, message):
 		self.message = message.lower()
 		self.type = "cesear"
 		self.scrambled = False
@@ -15,13 +24,17 @@ class cipher:
 			for j in range(0, len(self.message)):
 				character = message[j]
 				if character != space:
-					finder = self.alphabet.find(character)
-					newCharacter = (finder+3)
+					finder = (self.alphabet.find(character))
+					newCharacter = (finder)
 				else:
 					newCharacter = space
 				finalMessage.append(newCharacter)
-				self.message = finalMessage
-
+				nospace = ""
+				self.message = str(nospace.join(finalMessage))
+				return self.message
+				'''this is a classic cesear cipher
+				takes the message and shifts each character by three letters to the right
+				'''
 		if type == "alpharando":
 			for j in range(0, len(self.message)):
 				character = message[j]
@@ -50,7 +63,8 @@ class cipher:
 				finalMessage.append(newCharacter)
 
 				nospace = ""
-				self.message = nospace.join(finalMessage)
+				self.message = str(nospace.join(finalMessage))
+				return self.message
 	def unscramble(self, type):
 		space = " "
 		finalMessage = []
@@ -64,6 +78,7 @@ class cipher:
 					newCharacter = space
 				finalMessage.append(newCharacter)
 				self.message = finalMessage
+				return self.message
 
 		if type == "alpharando":
 			for j in range(0, len(self.message)):
@@ -78,10 +93,13 @@ class cipher:
 
 				nospace = ""
 				self.message = nospace.join(finalMessage)
-type = input("What type of scramble do you want(cesear or alpharando)?")
-if type != "cesear" or "alpharando":
-	type = "cesear"
+				return self.message
+##Main Code
+typ = input("What type of encryption do you want(cesear or alpharando)? ")
+if typ != "cesear" or "alpharando":
+	typ = "cesear"
 
 message = input("message: ")
-cipher = cipher(type, message)
-cipher.scramble(type)
+theCipher = cipher(typ, message)
+sendToFile(theCipher.scramble(typ))
+#sendToFile(theCipher.unscramble(type))
