@@ -3,7 +3,7 @@ import random
 import sys
 import string
 
-pigeonart = """ #ascii art
+pigeonart = """ 
                                                  ,::::.._
                                                ,':::::::::.
                                            _,-'`:::,::(o)::`-,.._
